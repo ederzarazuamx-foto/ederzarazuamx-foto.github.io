@@ -552,8 +552,24 @@
 
 <!-- URGENCIA -->
 <section class="urgencia">
-  <h2 class="urgencia-title">Tu fecha no espera:<br>cupo de una boda por día</h2>
+  <h2 class="urgencia-title">Esta promoción tiene vigencia<br>sábado 24 y domingo 25 de octubre</h2>
   <p class="urgencia-body">Trabajamos una boda por día: cuando una fecha se aparta, queda reservada solo para ustedes y no tomamos otra boda ese día. Si tienen una fecha en mente, consúltenla con nosotros para confirmar que sigue disponible.</p>
+  <div class="countdown" id="countdown">
+    <div class="countdown-item">
+      <span class="countdown-num" id="cd-h">--</span>
+      <span class="countdown-label">Horas</span>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-item">
+      <span class="countdown-num" id="cd-m">--</span>
+      <span class="countdown-label">Minutos</span>
+    </div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-item">
+      <span class="countdown-num" id="cd-s">--</span>
+      <span class="countdown-label">Segundos</span>
+    </div>
+  </div>
 </section>
 
 <!-- CTA -->
@@ -573,5 +589,29 @@
   <p class="footer-copy">Sujeto a disponibilidad de fecha · Monterrey, N.L.</p>
 </footer>
 
+<script>
+// Countdown hasta el domingo 25 de octubre 23:59 (Monterrey)
+const end = new Date('2026-10-25T23:59:59-06:00');
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = end - now;
+  if (diff <= 0) {
+    document.getElementById('cd-h').textContent = '00';
+    document.getElementById('cd-m').textContent = '00';
+    document.getElementById('cd-s').textContent = '00';
+    return;
+  }
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+</script>
 </body>
 </html>
